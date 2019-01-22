@@ -29,7 +29,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function shopping_lists() {
+    public function shopping_list() {
         return $this->hasMany(ShoppingList::class);
     }
 }

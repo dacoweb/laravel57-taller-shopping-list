@@ -18,8 +18,9 @@ use Illuminate\Http\Request;
 // });
 
 
-Route::resource('products', 'ProductController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
+Route::resource('products', 'Product\ProductController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
 
-Route::resource('shoppings', 'ShoppingListController', ['only' => ['index']]);
+Route::resource('users', 'User\UserController', ['only' => ['index', 'show']]);
+Route::resource('users.shoppings', 'User\UserShoppingListController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
 
-Route::resource('items', 'ShoppingItemController', ['only' => ['index']]);
+Route::resource('items', 'ShoppingItem\ShoppingItemController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
