@@ -7,9 +7,12 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
+
+    const ADMIN_USER = 'admin';
+    const REGULAR_USER = 'regular';
 
     /**
      * The attributes that are mass assignable.
