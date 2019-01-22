@@ -73,7 +73,6 @@ class Handler extends ExceptionHandler
             }
         }
         
-        dd($exception);
         return $this->errorResponse('Unexpected exception. Try later', 500);
         # return parent::render($request, $exception); # dd($exception)
     }

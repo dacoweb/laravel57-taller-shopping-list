@@ -17,10 +17,10 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-
+// App endpoint
 Route::resource('products', 'Product\ProductController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
 
+// Users endpoints
 Route::resource('users', 'User\UserController', ['only' => ['index', 'show']]);
 Route::resource('users.shoppings', 'User\UserShoppingListController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
-
-Route::resource('items', 'ShoppingItem\ShoppingItemController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
+Route::resource('users.shoppings.items', 'User\UserShoppingListItemsController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);

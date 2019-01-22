@@ -11,6 +11,10 @@ class ShoppingItem extends Model
 {
     use SoftDeletes;
     
+    protected $fillable = [
+        'quantity', 'price', 'product_id', 'shopping_list_id'
+    ];
+
     protected $dates = ['deleted_at'];
 
     public function shopping_list() {
