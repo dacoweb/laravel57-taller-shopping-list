@@ -8,6 +8,7 @@ use Illuminate\Database\QueryException;
 use Http\Client\Exception\HttpException;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
@@ -71,8 +72,9 @@ class Handler extends ExceptionHandler
             if ($exception->errorInfo[1] == 1451) {
                 return $this->errorResponse("Cannot remove this resource. It's related to another resource.", 409);
             }
+        } elseif ($exception instanceof ThrottleRequestsException) {
+            return $this->errorResponse($exception->getMessage(), 429);
         }
-        
         return $this->errorResponse('Unexpected exception. Try later', 500);
         # return parent::render($request, $exception); # dd($exception)
     }
