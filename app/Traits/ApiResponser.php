@@ -24,9 +24,10 @@ trait ApiResponser
         }
         $transformer = $collection->first()->transformer;
 
+        $collection = $this->filterData($collection, $transformer);
         $collection = $this->sortData($collection, $transformer);
 
-        $collection = $this->transformData($collection, $transformer);            
+        $collection = $this->transformData($collection, $transformer);
         return $this->successResponse($collection, $code);
     }
 
@@ -43,10 +44,31 @@ trait ApiResponser
 
     protected function sortData(Collection $collection, $transformer)
     {
+        // evaluate sort order
+        $sort_order = request()->has('sort_order') ? request()->sort_order : 'asc';
+
+        // sort data
         if (request()->has('sort_by')) {
             $attribute = $transformer::originalAttribute(request()->sort_by);
-            $collection = $collection->sortBy->{$attribute};
+            if ($sort_order === 'desc') {
+                $collection = $collection->sortByDesc->{$attribute};
+            } else {
+                $collection = $collection->sortBy->{$attribute};
+            }
         }
+        return $collection;
+    }
+
+    protected function filterData(Collection $collection, $transformer)
+    {
+        foreach (request()->query as $query => $value) {
+            $attribute = $transformer::originalAttribute($query);
+
+            if (isset($attribute, $value)) {
+                $collection = $collection->where($attribute, $value);
+            }
+        }
+
         return $collection;
     }
 }
