@@ -33,7 +33,11 @@ trait ApiResponser
 
     protected function showOne(Model $model, $code = 200)
     {
-        return $this->successResponse(['data' => $model], $code);
+        $transformer = $model->transformer;
+
+        $model = $this->transformData($model, $transformer);
+
+        return $this->successResponse($model, $code);
     }
 
     protected function transformData($data, $transformer)

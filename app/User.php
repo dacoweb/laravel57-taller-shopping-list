@@ -12,8 +12,8 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
-    const ADMIN_USER = 'admin';
-    const REGULAR_USER = 'regular';
+    const ADMIN_USER = true;
+    const REGULAR_USER = false;
 
     /**
      * The attributes that are mass assignable.
@@ -38,10 +38,5 @@ class User extends Authenticatable implements MustVerifyEmail
     public function shopping_list()
     {
         return $this->hasMany(ShoppingList::class);
-    }
-
-    public function isAdmin()
-    {
-        return $this->admin === $this::ADMIN_USER ? true : false;
     }
 }

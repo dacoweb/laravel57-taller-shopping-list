@@ -18,7 +18,7 @@ class UserTransformer extends TransformerAbstract
             'id' => (int)$user->id,
             'name' => $user->name,
             'email' => $user->email,
-            'isAdmin' => (boolean)$user->isAdmin(),
+            'isAdmin' => (int)$user->admin,
             'creationDate' => (string)$user->created_at,
             'modifiedDate' => (string)$user->updated_at,
         ];
@@ -30,7 +30,7 @@ class UserTransformer extends TransformerAbstract
             'id' => 'id',
             'name' => 'name',
             'email' => 'email',
-            'isAdmin' => 'isAdmin',
+            'isAdmin' => 'admin',
             'creationDate' => 'created_at',
             'modifiedDate' => 'updated_at',
         ];
