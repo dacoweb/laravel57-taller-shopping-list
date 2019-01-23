@@ -3,6 +3,7 @@
 namespace App\Transformers;
 
 use App\ShoppingItem;
+use App\ShoppingList;
 use League\Fractal\TransformerAbstract;
 
 class ShoppingItemTransformer extends TransformerAbstract
@@ -14,8 +15,11 @@ class ShoppingItemTransformer extends TransformerAbstract
      */
     public function transform(ShoppingItem $shopping_item)
     {
+        $shopping_list = ShoppingList::findOrFail($shopping_item->shopping_list_id);
+        $user_id = $shopping_list->user_id;
+
         return [
-            'id' => (int)$shopping_item->id,
+            'item_id' => (int)$shopping_item->id,
             'qty' => $shopping_item->quantity,
             'price' => $shopping_item->price,
             'list_id' => (int)$shopping_item->shopping_list_id,
@@ -23,13 +27,31 @@ class ShoppingItemTransformer extends TransformerAbstract
             'creationDate' => (string)$shopping_item->created_at,
             'modifiedDate' => (string)$shopping_item->updated_at,
             'deletedDate' => isset($shopping_item->deleted_at) ? (string)$shopping_item->deleted_at : null,
+
+            'links' => [
+                [
+                    'rel' => 'self',
+                    'href' => route('users.shoppings.items.show', [
+                        'user_id' => $user_id, 
+                        'shopping_list_id' => $shopping_item->shopping_list_id,
+                        'item_id' => $shopping_item->id,
+                        ]
+                    ),
+                ],
+                'links' => [
+                    [
+                        'rel' => 'products',
+                        'href' => route('products.show', $shopping_item->product_id),
+                    ],
+                ]
+            ]
         ];
     }
 
     public static function originalAttribute($name)
     {
         $attributes = [
-            'id' => 'id',
+            'id' => 'item_id',
             'qty' => 'quantity',
             'price' => 'price',
             'list_id' => 'shopping_list_id',

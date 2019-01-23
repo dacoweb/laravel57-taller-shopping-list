@@ -21,6 +21,17 @@ class UserTransformer extends TransformerAbstract
             'isAdmin' => (int)$user->admin,
             'creationDate' => (string)$user->created_at,
             'modifiedDate' => (string)$user->updated_at,
+
+            'links' => [
+                [
+                    'rel' => 'self',
+                    'href' => route('users.show', $user->id),
+                ],
+                [
+                    'rel' => 'users.shoppings',
+                    'href' => route('users.shoppings.index', $user->id),
+                ],
+            ]
         ];
     }
 

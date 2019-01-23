@@ -21,6 +21,25 @@ class ShoppingListTransformer extends TransformerAbstract
             'creationDate' => (string)$shopping_list->created_at,
             'modifiedDate' => (string)$shopping_list->updated_at,
             'deletedDate' => isset($shopping_list->deleted_at) ? (string)$shopping_list->deleted_at : null,
+
+            'links' => [
+                [
+                    'rel' => 'self',
+                    'href' => route('users.shoppings.show', [
+                        'user_id' => $shopping_list->user_id, 
+                        'id' => $shopping_list->id
+                        ]
+                    ),
+                ],
+                [
+                    'rel' => 'users.shoppings.items',
+                    'href' => route('users.shoppings.items.index', [
+                        'user_id' => $shopping_list->user_id, 
+                        'id' => $shopping_list->id
+                        ]
+                    ),
+                ],
+            ]
         ];
     }
 
