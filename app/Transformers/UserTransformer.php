@@ -23,4 +23,17 @@ class UserTransformer extends TransformerAbstract
             'modifiedDate' => (string)$user->updated_at,
         ];
     }
+
+    public static function originalAttribute($name)
+    {
+        $attributes = [
+            'id' => 'id',
+            'name' => 'name',
+            'email' => 'email',
+            'isAdmin' => 'isAdmin',
+            'creationDate' => 'created_at',
+            'modifiedDate' => 'updated_at',
+        ];
+        return isset($attributes[$name]) ? $attributes[$name] : null;
+    }
 }

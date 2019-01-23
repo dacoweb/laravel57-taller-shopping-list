@@ -23,4 +23,17 @@ class ShoppingListTransformer extends TransformerAbstract
             'deletedDate' => isset($shopping_list->deleted_at) ? (string)$shopping_list->deleted_at : null,
         ];
     }
+
+    public static function originalAttribute($name)
+    {
+        $attributes = [
+            'id' => 'id',
+            'name' => 'name',
+            'status' => 'status',
+            'creationDate' => 'created_at',
+            'modifiedDate' => 'updated_at',
+            'deletedDate' => 'deleted_at',
+        ];
+        return isset($attributes[$name]) ? $attributes[$name] : null;
+    }
 }
