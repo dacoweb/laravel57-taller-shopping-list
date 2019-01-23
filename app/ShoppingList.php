@@ -4,6 +4,7 @@ namespace App;
 
 use App\ShoppingItem;
 use Illuminate\Database\Eloquent\Model;
+use App\Transformers\ShoppingListTransformer;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ShoppingList extends Model
@@ -24,6 +25,8 @@ class ShoppingList extends Model
     ];
 
     protected $dates = ['deleted_at'];
+
+    public $transformer = ShoppingListTransformer::class;
 
     public function user() {
         return $this->belongsTo(User::class);

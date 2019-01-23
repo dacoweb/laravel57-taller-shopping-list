@@ -75,8 +75,11 @@ class Handler extends ExceptionHandler
         } elseif ($exception instanceof ThrottleRequestsException) {
             return $this->errorResponse($exception->getMessage(), 429);
         }
+        if (config('app.debug')) {
+            dd($exception);
+            # return parent::render($request, $exception); # 
+        }
         return $this->errorResponse('Unexpected exception. Try later', 500);
-        # return parent::render($request, $exception); # dd($exception)
     }
 
     /**

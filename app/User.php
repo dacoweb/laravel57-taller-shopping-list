@@ -3,6 +3,7 @@
 namespace App;
 
 use App\ShoppingList;
+use App\Transformers\UserTransformer;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -20,7 +21,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'admin'
     ];
 
     /**
@@ -29,10 +30,16 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 
     ];
+
+    public $transformer = UserTransformer::class;
 
     public function shopping_list() {
         return $this->hasMany(ShoppingList::class);
+    }
+
+    public function isAdmin() {
+        return $this->admin === $this::ADMIN_USER ? true : false;
     }
 }
