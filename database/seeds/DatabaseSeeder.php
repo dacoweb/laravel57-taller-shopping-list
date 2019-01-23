@@ -26,9 +26,9 @@ class DatabaseSeeder extends Seeder
         factory(User::class, 20)->create();
         factory(Product::class, 100)->create();
         factory(ShoppingList::class, 50)->create();
-        factory(ShoppingItem::class, 100)->create()->each(function($item){
+        factory(ShoppingItem::class, 100)->create()->each(function ($item) {
             $shopping_list_id = ShoppingList::all()->random()->id;
-            $item->shopping_list()->associate($shopping_list_id );
-        });        
+            $item->shopping_list()->associate($shopping_list_id);
+        });
     }
 }

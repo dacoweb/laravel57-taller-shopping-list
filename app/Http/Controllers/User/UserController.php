@@ -29,7 +29,8 @@ class UserController extends ApiController
         return $this->showOne($user);
     }
 
-    public function verify($token) {
+    public function verify($token)
+    {
         $user = User::where('verification_token', $token)->firstOrFail();
 
         $user->verified = User::VERIFIED_USER;
@@ -37,5 +38,4 @@ class UserController extends ApiController
 
         $user->save();
     }
-
 }

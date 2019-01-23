@@ -30,16 +30,18 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 
+        'password', 'remember_token',
     ];
 
     public $transformer = UserTransformer::class;
 
-    public function shopping_list() {
+    public function shopping_list()
+    {
         return $this->hasMany(ShoppingList::class);
     }
 
-    public function isAdmin() {
+    public function isAdmin()
+    {
         return $this->admin === $this::ADMIN_USER ? true : false;
     }
 }

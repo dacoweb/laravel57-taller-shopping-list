@@ -70,7 +70,7 @@ class UserShoppingListController extends ApiController
 
         $shopping->fill($request->only(['name', 'status']));
 
-        if ($shopping->isClean()){
+        if ($shopping->isClean()) {
             return $this->errorResponse("No changes applied.", 422);
         }
 

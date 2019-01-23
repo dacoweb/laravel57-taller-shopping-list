@@ -20,11 +20,13 @@ class ShoppingItem extends Model
 
     public $transformer = ShoppingItemTransformer::class;
 
-    public function shopping_list() {
+    public function shopping_list()
+    {
         return $this->belongsTo(ShoppingList::class);
     }
 
-    public function product() {
+    public function product()
+    {
         return $this->hasOne(Product::class);
     }
 }

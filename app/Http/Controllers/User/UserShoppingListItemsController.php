@@ -12,7 +12,7 @@ class UserShoppingListItemsController extends ApiController
 {
     /**
      * Display a listing of the resource.
-     * 
+     *
      * @param  \App\ShoppingList $shopping
      * @return \Illuminate\Http\Response
      */
@@ -45,7 +45,6 @@ class UserShoppingListItemsController extends ApiController
         $item = ShoppingItem::create($data);
 
         return $this->showOne($item, 201);
-
     }
 
     /**

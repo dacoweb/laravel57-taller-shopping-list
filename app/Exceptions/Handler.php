@@ -65,7 +65,7 @@ class Handler extends ExceptionHandler
         } elseif ($exception instanceof NotFoundHttpException ||
                 $exception instanceof HttpException) {
             return $this->errorResponse('URL Cannot be found', 404);
-        } elseif($exception instanceof HttpResponseException) {
+        } elseif ($exception instanceof HttpResponseException) {
             $message = $exception->errors()->getMessages();
             return $this->errorResponse($message, 404);
         } elseif ($exception instanceof QueryException) {
@@ -75,10 +75,11 @@ class Handler extends ExceptionHandler
         } elseif ($exception instanceof ThrottleRequestsException) {
             return $this->errorResponse($exception->getMessage(), 429);
         }
+
         if (config('app.debug')) {
-            dd($exception);
-            # return parent::render($request, $exception); # 
+            return parent::render($request, $exception);
         }
+
         return $this->errorResponse('Unexpected exception. Try later', 500);
     }
 
