@@ -6,9 +6,15 @@ use App\User;
 use App\ShoppingList;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
+use App\Transformers\ShoppingListTransformer;
 
 class UserShoppingListController extends ApiController
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->middleware('transform.api.inputs:' . ShoppingListTransformer::class)->only(['store', 'update']);
+    }
     /**
      * Display a listing of the resource.
      *

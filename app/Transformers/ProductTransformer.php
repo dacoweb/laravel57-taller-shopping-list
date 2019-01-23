@@ -16,7 +16,7 @@ class ProductTransformer extends TransformerAbstract
     {
         return [
             'id' => (int)$product->id,
-            'name' => $product->name,
+            'product' => $product->name,
             'description' => $product->description,
             'creationDate' => (string)$product->created_at,
             'modifiedDate' => (string)$product->updated_at,
@@ -28,11 +28,24 @@ class ProductTransformer extends TransformerAbstract
     {
         $attributes = [
             'id' => 'id',
-            'name' => 'name',
+            'product' => 'name',
             'description' => 'description',
             'creationDate' => 'created_at',
             'modifiedDate' => 'updated_at',
             'deletedDate' => 'deleted_at',
+        ];
+        return isset($attributes[$name]) ? $attributes[$name] : null;
+    }
+
+    public static function transformedAttribute($name)
+    {
+        $attributes = [
+            'id' => 'id',
+            'name' => 'product',
+            'description' => 'description',
+            'created_at' => 'creationDate',
+            'updated_at' => 'modifiedDate',
+            'deleted_at' => 'deletedDate',
         ];
         return isset($attributes[$name]) ? $attributes[$name] : null;
     }

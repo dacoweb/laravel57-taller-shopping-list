@@ -40,4 +40,19 @@ class ShoppingItemTransformer extends TransformerAbstract
         ];
         return isset($attributes[$name]) ? $attributes[$name] : null;
     }
+
+    public static function transformedAttribute($name)
+    {
+        $attributes = [
+            'id' => 'id',
+            'quantity' => 'qty',
+            'price' => 'price',
+            'shopping_list_id' => 'list_id',
+            'product_id' => 'product_id',
+            'created_at' => 'creationDate',
+            'updated_at' => 'modifiedDate',
+            'deleted_at' => 'deletedDate',
+        ];
+        return isset($attributes[$name]) ? $attributes[$name] : null;
+    }
 }

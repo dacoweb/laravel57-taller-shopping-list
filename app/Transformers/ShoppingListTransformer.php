@@ -36,4 +36,17 @@ class ShoppingListTransformer extends TransformerAbstract
         ];
         return isset($attributes[$name]) ? $attributes[$name] : null;
     }
+
+    public static function transformedAttribute($name)
+    {
+        $attributes = [
+            'id' => 'id',
+            'name' => 'name',
+            'status' => 'status',
+            'created_at' => 'creationDate',
+            'updated_at' => 'modifiedDate',
+            'deleted_at' => 'deletedDate',
+        ];
+        return isset($attributes[$name]) ? $attributes[$name] : null;
+    }
 }
