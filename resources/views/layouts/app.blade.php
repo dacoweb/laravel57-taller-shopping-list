@@ -33,7 +33,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        @if (Auth::check())
+                            <li><a href="{{route('personal-clients')}}">My Clients</a>&nbsp;</li>
+                            <li><a href="{{route('authorized-clients')}}">My Authorized Clients</a> </li>
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->

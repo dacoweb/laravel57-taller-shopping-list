@@ -15,6 +15,10 @@ Auth::routes(['verify' => true, 'register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
+// Authenticated area:
+Route::get('/home/authorized-clients', 'HomeController@getAuthorizedClients')->name('authorized-clients');
+Route::get('/home/my-clients', 'HomeController@getClients')->name('personal-clients');
+
 Route::get('/', function () {
     return view('welcome');
 })->middleware('guest');
