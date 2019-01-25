@@ -5,12 +5,13 @@ namespace App;
 use App\ShoppingList;
 use App\Transformers\UserTransformer;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable;
+    use Notifiable, SoftDeletes;
 
     const ADMIN_USER = true;
     const REGULAR_USER = false;
