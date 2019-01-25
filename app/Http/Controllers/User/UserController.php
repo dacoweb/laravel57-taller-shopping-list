@@ -8,6 +8,13 @@ use App\Http\Controllers\ApiController;
 
 class UserController extends ApiController
 {    
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->middleware('can:view,user')->only('show');
+    }
+    
     /**
      * Display a listing of the resource.
      *

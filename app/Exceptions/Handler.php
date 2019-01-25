@@ -9,6 +9,7 @@ use Http\Client\Exception\HttpException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Session\TokenMismatchException;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -78,6 +79,8 @@ class Handler extends ExceptionHandler
             return $this->errorResponse($exception->getMessage(), 429);
         } elseif ($exception instanceof TokenMismatchException) {
             return redirect()->back()->withInput($request->input());
+        } elseif ($exception instanceof AuthorizationException) {
+            return $this->errorResponse($exception->getMessage(), 403);
         }
 
         if (config('app.debug')) {
